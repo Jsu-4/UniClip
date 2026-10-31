@@ -1,6 +1,6 @@
 # UniClip 个人 ADB 修复维护记录
 
-更新：2026-11-01（Asia/Shanghai）。本文件在个人分支，未放入上游 PR。
+更新：2026-11-01（Asia/Shanghai）。本文件在 `personal/android-adb-fix` 个人维护分支，未放入上游 PR。后续升级任务入口为 [TodoList.md](TodoList.md)。
 
 ## 仓库、提交与唯一源码目录
 
@@ -10,9 +10,10 @@
 - PR：https://github.com/UniClipboard/UniClip/pull/109 。提交 PR 不等于作者已接受。
 - 最新移植基线：`168972ae0f35755e89e3e7dc8889297aace13f06`，版本 `2.4.0.198-alpha.1`。
 - PR 分支：`fix/android-adb-monitor-recovery`；修复提交：`b7fab3c585cd29d0daa7d3f5acff3c67b2010493`。
-- 日常个人分支：`personal/android-adb-fix`，在修复上增加本记录和构建入口。
+- 日常个人分支：`personal/android-adb-fix`，在修复上增加维护记录和构建入口；本地默认在此工作。
+- `main` 仅跟随作者 `upstream/main`，保持上游基线清晰；PR 分支保持贡献范围独立。分支使用规则见 TodoList。
 - 历史 APK 基线：`fcf68bfe917fc7a12a3c0696ac90b5463ae0b724`，`2.3.0.195`。
-  历史源码分支 `personal/adb-fix-2.3.0.195`，修复提交 `6caf3655`，标签 `personal-adb-fix-2.3.0.195`。
+  历史修复提交 `6caf3655` 由远程标签 `personal-adb-fix-2.3.0.195` 保留；对应旧版分支已清理。
   已逐字节确认其所有改动的产品和测试文件与原 APK 构建源码一致。
 
 ## 相对上游修复了什么
@@ -34,7 +35,7 @@
 - 原生目标：`:clipboard-overlay:testDebugUnitTest --rerun-tasks --no-build-cache --no-daemon`，6 项通过，73 项构建任务实际执行。
   Gradle 配置使用历史 Engine AAR；仅验证 clipboard-overlay 编译和测试，不证明新 Engine 或完整 APK 构建成功。
 - 历史 `2.3.0.195` Release ARM64 APK 已构建且签名、内置 bundle、Engine 载荷检查通过；证据在本机 `.personal/history/验证记录.json`。
-- 当前最新 main 的 Engine pin 是 `357d7f64006789285fe5bfc4f025992bc9b84e5f`；尚未完成它的完整 APK 构建。
+- 本次移植基线 `168972ae` 的 Engine pin 是 `357d7f64006789285fe5bfc4f025992bc9b84e5f`；尚未完成它的完整 APK 构建。
   历史 Engine pin 是 `f44ae136f76a05e642fc22e32b823161f0716cef`，不能偷换给新版使用。
 - 荣耀真机后台复制至 Mac、锁屏、长时间待机、两端重启尚未验收。自动“临时停止”仍未完成根因定位，不得宣传为已修复。
 - Android 一次性日志访问同意、厂商杀后台和重启通知恢复机制仍存在，不能保证永久免操作。
@@ -70,15 +71,11 @@ JDK 位于 `/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home`。
 不打开 UniClip、不点手动同步，确认 Mac 自动收到；再测锁屏、切网、长待机、重启。
 授权后关闭无线调试，正常同步不依赖持续 ADB 连接。
 
-## 作者升级后如何继续（给以后接手的人或 AI）
+## 后续升级与未完成工作
 
-1. 先检查当前目录、Git 状态和本文件，不覆盖用户未提交修改；只在此目录管理分支，不复制新源码树。
-2. `git fetch upstream --tags`，记录当时 `upstream/main` SHA 和 release 版本，读取当时 AGENTS、构建说明和 Engine pin。
-3. 检查 PR 是否合并，再检查代码和测试是否已覆盖上述问题；不能仅依据版本号、PR 标题或 DoneList 判定。
-4. 从最新 main 创建新的个人升级分支。对照 `git show b7fab3c5` 与测试逐项迁移仍缺失的行为；若已由上游解决则不重复套补丁。
-   结构变化时重新实现同等行为，不能直接拿旧文件覆盖新版。个人构建入口和记录按需从个人分支迁入。
-5. 使用新版自己的 Engine pin 和依赖，修复真实冲突；跑 Jest、类型检查、lint、原生回归及完整 ARM64 APK 构建。
-6. 沿用本机签名和 test 包名，确认 versionCode、安装升级和用户数据兼容，再在同一荣耀手机完成上述验收。
-7. 更新本文件的基线、修复提交、Engine、APK checksum、验证结果与未完成项，提交推送 Fork；个人记录不混入上游 PR。
+后续升级统一按 [TodoList.md](TodoList.md) 执行，必须向用户逐项报告作者是否修复、证据、个人补丁处理和手机验收结果。
+历史根因、实现细节及验收标准见 [ADB 事件后台同步修复交接资料](personal-maintenance/adb-event-handoff.md)。
 
-未来接手请求示例：“请读取 /Users/jw/Code/tools/UniClip/DoneList.md 和 Git 修复提交，在作者最新代码上检查哪些修复仍需要，适配并构建同一签名、同一测试包名的 ARM64 APK，保留手机数据；通过真实验证后再交付。”
+截至本记录，最新移植版完整 APK 构建及系统性荣耀真机验收仍未完成；历史交接资料中的用户正向反馈不等于完整验收。
+PR #109 的 CodeRabbit 提到 Shizuku 监听清理可能误停新会话，这条审查意见尚待代码核实、复现和修复，不能记为已解决。
+本次整理文档与分支未执行代码修复、作者版本升级、APK 构建或手机操作。
