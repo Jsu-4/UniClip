@@ -1,12 +1,14 @@
 # UniClip 后续升级任务入口
 
+入口文件：`/Users/jw/Code/tools/UniClip/docs/personal-maintenance/TodoList.md`。本文中的源码、脚本和产物路径以仓库根目录为基准，文档链接相对于本文。
+
 当用户要求“根据作者最新代码更新我的 UniClip”时执行本文；仅阅读或整理本文不代表启动升级、安装或真机测试。
 
 ## 目标
 
 请在 `/Users/jw/Code/tools/UniClip` 中，根据作者最新代码更新我的 UniClip。
 
-先读取 [DoneList.md](DoneList.md)、历史修复提交及[ADB 事件后台同步修复交接资料](personal-maintenance/adb-event-handoff.md)，逐项核实作者是否已修复相关问题，不能仅凭版本号或更新说明判断。交接资料是历史实现与验收参考，旧基线、旧构建结果和当时任务范围不代表当前版本状态或当前授权。
+先读取 [DoneList.md](DoneList.md)、历史修复提交及[ADB 事件后台同步修复交接资料](adb-event-handoff.md)，逐项核实作者是否已修复相关问题，不能仅凭版本号或更新说明判断。交接资料是历史实现与验收参考，旧基线、旧构建结果和当时任务范围不代表当前版本状态或当前授权。
 
 - 尚未修复的部分：适配并保留仍然需要的 ADB 修复。
 - 已经修复的部分：采用作者的最新实现，移除不再需要的个人改动。

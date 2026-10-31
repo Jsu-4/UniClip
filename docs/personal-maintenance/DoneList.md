@@ -1,5 +1,7 @@
 # UniClip 个人 ADB 修复维护记录
 
+本文中的源码、脚本和产物路径以仓库根目录为基准，文档链接相对于本文。
+
 更新：2026-11-01（Asia/Shanghai）。本文件在 `personal/android-adb-fix` 个人维护分支，未放入上游 PR。后续升级任务入口为 [TodoList.md](TodoList.md)。
 
 ## 仓库、提交与唯一源码目录
@@ -74,7 +76,7 @@ JDK 位于 `/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home`。
 ## 后续升级与未完成工作
 
 后续升级统一按 [TodoList.md](TodoList.md) 执行，必须向用户逐项报告作者是否修复、证据、个人补丁处理和手机验收结果。
-历史根因、实现细节及验收标准见 [ADB 事件后台同步修复交接资料](personal-maintenance/adb-event-handoff.md)。
+历史根因、实现细节及验收标准见 [ADB 事件后台同步修复交接资料](adb-event-handoff.md)。
 
 截至本记录，最新移植版完整 APK 构建及系统性荣耀真机验收仍未完成；历史交接资料中的用户正向反馈不等于完整验收。
 PR #109 的 CodeRabbit 提到 Shizuku 监听清理可能误停新会话，这条审查意见尚待代码核实、复现和修复，不能记为已解决。
